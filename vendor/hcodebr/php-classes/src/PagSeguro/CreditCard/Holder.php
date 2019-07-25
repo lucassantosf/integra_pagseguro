@@ -2,6 +2,13 @@
 
 namespace Hcode\PagSeguro\CreditCard;
 
+use Exception;
+use DOMDocument;
+use DOMElement;
+use DateTime;
+use HCode\PagSeguro\Document;
+use HCode\PagSeguro\Phone;
+
 class Holder{
 	private $name;
 	private $cpf;
@@ -16,7 +23,7 @@ class Holder{
 		$this->name = $name;
 		$this->cpf = $cpf;
 		$this->birthDate = $birthDate;
-		$this->phone = $phone;
+		$this->phone = $phone; 
 	}
 
 	public function getDOMElement():DOMElement{

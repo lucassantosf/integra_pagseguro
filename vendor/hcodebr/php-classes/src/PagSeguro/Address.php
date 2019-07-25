@@ -2,6 +2,10 @@
 
 namespace Hcode\PagSeguro;
 
+use Exception;
+use DOMDocument;
+use DOMElement;
+
 class Address{ 
 
 	private $street;
@@ -12,7 +16,7 @@ class Address{
 	private $city;
 	private $state;
 
-	public function __construct(string $street, string $number, string $complement, string $district, string $number, string $postalCode, string $city, string $state){
+	public function __construct(string $street, string $number, string $complement, string $district, string $postalCode, string $city, string $state, string $country){
 		if(!$street){
 			throw new Exception("Informe o logradouro do endereço"); 
 		}
@@ -35,7 +39,7 @@ class Address{
 
 		if(!$state){
 			throw new Exception("Informe o pais do endereço"); 
-		}
+		} 
 
 		$this->street = $street;
 		$this->number = $number;
@@ -74,6 +78,6 @@ class Address{
 		$state = $dom->createElement("state", $this->state);
 		$state = $address->appendChild($state);
 	
-		return $phone;
+		return $address;
 	}
 }
