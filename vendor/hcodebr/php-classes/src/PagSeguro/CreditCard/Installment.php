@@ -4,8 +4,8 @@ namespace Hcode\PagSeguro\CreditCard;
 
 use Exception;
 use DOMDocument;
-use DOMElement;
-use DateTime;
+use DOMElement; 
+use Hcode\PagSeguro\Config;
 
 class Installment{
 	private $quantity;

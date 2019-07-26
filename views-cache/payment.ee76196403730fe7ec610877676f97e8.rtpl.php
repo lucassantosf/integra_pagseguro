@@ -1,4 +1,4 @@
-<style>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><style>
 .button.alt.btn:hover, .button.alt.btn:focus {
     color: #fff!important;
 }
@@ -15,11 +15,11 @@
 							<div class="row">
 								<div class="col-md-12">
 
-									{if="$msgError != ''"}
+									<?php if( $msgError != '' ){ ?>
 									<div class="alert alert-danger">
-										{$msgError}
+										<?php echo htmlspecialchars( $msgError, ENT_COMPAT, 'UTF-8', FALSE ); ?>
 									</div>
-                                    {/if}
+                                    <?php } ?>
                                     
                                     <div id="alert-error" class="alert alert-danger hide">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -200,9 +200,9 @@
                                                                     <label class="" for="month_name">&nbsp;</label>
                                                                     <select name="year" class="input-text" required="required">
                                                                         <option disabled="disabled" selected="selected" value="">Ano</option>
-                                                                        {loop="$years"}
-                                                                        <option value="{$value}">{$value}</option>
-                                                                        {/loop}
+                                                                        <?php $counter1=-1;  if( isset($years) && ( is_array($years) || $years instanceof Traversable ) && sizeof($years) ) foreach( $years as $key1 => $value1 ){ $counter1++; ?>
+                                                                        <option value="<?php echo htmlspecialchars( $value1, ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1, ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                                                                        <?php } ?>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -266,9 +266,9 @@
 <script id="tpl-installment" type="text/x-handlebars-template">
     <option>{{quantity}}x de {{installmentAmount}} com juros ({{totalAmount}})</option>
 </script>
-<script src="{$pagseguro.urlJS}"></script>
+<script src="<?php echo htmlspecialchars( $pagseguro["urlJS"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"></script>
 <script type="text/javascript">
-    PagSeguroDirectPayment.setSessionId('{$pagseguro.id}');
+    PagSeguroDirectPayment.setSessionId('<?php echo htmlspecialchars( $pagseguro["id"], ENT_COMPAT, 'UTF-8', FALSE ); ?>');
 </script>
 <script type="text/javascript">
     
@@ -341,7 +341,7 @@
                         //Recuperar opções de parcelamentos de acordo á como cada bandeira aceita
                         PagSeguroDirectPayment.getInstallments({
                                 amount: parseFloat("500"),
-                                maxInstallmentNoInterest: parseInt("{$pagseguro.maxInstallmentNoInterest}"),
+                                maxInstallmentNoInterest: parseInt("<?php echo htmlspecialchars( $pagseguro["maxInstallmentNoInterest"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"),
                                 brand: response.brand.name,
                                 success: function(response){  
 
@@ -359,7 +359,7 @@
 
                                     $.each(response.installments[$("#brand_field").val()], function(index, installment){
                                         
-                                        if(parseInt("{$pagseguro.maxInstallment}") > index){ 
+                                        if(parseInt("<?php echo htmlspecialchars( $pagseguro["maxInstallment"], ENT_COMPAT, 'UTF-8', FALSE ); ?>") > index){ 
                                             //Sem juros
                                             if(installment.interestFree === true){
                                                 var $option = $(tplInstallmentFree({

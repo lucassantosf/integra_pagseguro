@@ -6,6 +6,8 @@ use Exception;
 use DOMDocument;
 use DOMElement;
 
+use Hcode\PagSeguro\Payment\Method;
+
 class Payment{
 	private $mode = "default";
 	private $currency = "BRL";
@@ -29,6 +31,24 @@ class Payment{
 		$this->shipping = $shipping;
 		$this->reference = $reference;
 		$this->extraAmount = number_format($extraAmount,2,".","");  
+	}
+
+	public function addItem(Item $item){
+		array_push($this->items, $item);
+	}
+
+	public function setCreditCard(CreditCard $creditCard){
+		$this->creditCard = $creditCard;
+		$this->method = Method::CREDIT_CARD;
+	}
+
+	public function setBank(Bank $bank){
+		$this->bank = $bank;
+		$this->method = Method::DEBIT;
+	}
+
+	public function setBoleto(){ 
+		$this->method = Method::BOLETO;
 	}
 
 	public function getDOMDocument(){

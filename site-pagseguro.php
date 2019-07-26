@@ -9,6 +9,9 @@ use \Hcode\PagSeguro\Phone;
 use \Hcode\PagSeguro\Address;
 use \Hcode\PagSeguro\Sender;
 use \Hcode\PagSeguro\Shipping;
+use \Hcode\PagSeguro\CreditCard;
+use \Hcode\PagSeguro\Item;
+use \Hcode\PagSeguro\Payment;
 use \Hcode\PagSeguro\CreditCard\Installment;
 use \Hcode\PagSeguro\CreditCard\Holder;
 use \Hcode\Model\Order;
@@ -62,15 +65,48 @@ $app->post('/payment/credit',function(){
  
 	$shipping = new Shipping($address, (float)$cart->getvlfreight(), Shipping::PAC);
 
-	$installment = new Installment($address, (float)$cart->getvlfreight(), Shipping::PAC);
+	$installment = new Installment((int)$_POST['installments_qtd'],(float)$_POST["installments_value"]);
 
-	$dom = new DOMDocument();
+ 	//Endereço de fatura
+	$billingAddress = new Address(
+		"Rua Teste",
+		"140", 
+		"",
+		"Bairro",
+		"18078666",
+		"Sorocaba",
+		"SP",
+		"Brasil"
+	);
 
-	$test = $installment->getDOMElement();
+	$creditCard = new CreditCard(
+		$_POST["token"],
+		$installment,
+		$holder,
+		$billingAddress
+	);
 
-	$testNode = $dom->importNode($test, true);
+	$payment = new Payment(
+		//$order->getidorder(),
+		1,
+		$sender,
+		$shipping
+	);
 
-	$dom->appendChild($testNode);
+	foreach ($cart->getProducts() as $product) {
+		$item = new Item(
+			(int)$product['idproduct'],
+			$product['desproduct'],
+			(float)$product['vlprice'],
+			(int)$product['nrqtd'],
+		); 	
+		$payment->addItem($item);
+	} 
+
+	$payment->setCreditCard($creditCard);
+
+	$dom = $payment->getDOMDocument();
+ 
  
 	echo $dom->saveXml();
 
