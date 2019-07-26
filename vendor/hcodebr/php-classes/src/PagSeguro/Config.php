@@ -23,6 +23,8 @@ class Config{
 	//Quanto a loja aceita de parcelamento
 	const MAX_INSTALLMENT = 10;
 
+	const NOTIFICATION_URL = "http://www.html5dev.com.br/payment/notification";
+
 	public static function getAuthentication():array{
 		if(Config::SANDBOX === true){
 			return [

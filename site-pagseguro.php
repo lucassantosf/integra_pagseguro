@@ -98,7 +98,7 @@ $app->post('/payment/credit',function(){
 			(int)$product['idproduct'],
 			$product['desproduct'],
 			(float)$product['vlprice'],
-			(int)$product['nrqtd'],
+			(int)$product['nrqtd']
 		); 	
 		$payment->addItem($item);
 	} 
@@ -106,7 +106,7 @@ $app->post('/payment/credit',function(){
 	$payment->setCreditCard($creditCard);
 
 	$dom = $payment->getDOMDocument();
- 
+ 	
  
 	echo $dom->saveXml();
 

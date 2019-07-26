@@ -319,6 +319,16 @@
         });
         //Fim Recuperar meios de pagamentos
 
+        $("#installments_field").on("change",function(){
+            var installment = $(this).find("option:selected").data("installment");
+
+            console.log(installment);
+
+            $("[name=installments_qtd]").val(installment.quantity);
+            $("[name=installments_value]").val(installment.installmentAmount);
+            $("[name=installments_total]").val(installment.totalAmount);
+        });
+
         //Recuperar bandeira do cartão de crédito ao informar 6 primeiros digitos
         $("#number_field").on("change",function(){
             var value = $(this).val();            
