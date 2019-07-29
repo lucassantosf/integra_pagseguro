@@ -48,6 +48,7 @@ class Address{
 		$this->postalCode = $postalCode;
 		$this->city = $city; 
 		$this->state = $state; 
+		$this->country = $country; 
 	}
 
 	public function getDOMElement($node = "address"):DOMElement{
@@ -77,7 +78,10 @@ class Address{
 
 		$state = $dom->createElement("state", $this->state);
 		$state = $address->appendChild($state);
-	
+		
+		$country = $dom->createElement("country", $this->country);
+		$country = $address->appendChild($country);
+		
 		return $address;
 	}
 }

@@ -49,29 +49,29 @@ $app->post('/payment/credit',function(){
 	$address = new Address(
 		"Rua Teste",
 		"140", 
-		"",
-		"Bairro",
-		"18078666",
+		"complemento",
+		"Bairro exemplo",
+		"18078-666",
 		"Sorocaba",
 		"SP",
 		"Brasil"
-	); 
+	);  
 
 	$birthDate = new DateTime($_POST['birth']);
 
-	$sender = new Sender('teste',$cpf,$birthDate,$phone, 'teste@gmail.com', $_POST['hash']);
+	$sender = new Sender('Fulano da Silva',$cpf,$birthDate,$phone, 'teste@sandbox.pagseguro.com.br', $_POST['hash']);
  	
-	$holder = new Holder('teste',$cpf,$birthDate,$phone);
+	$holder = new Holder('fulano da silva',$cpf,$birthDate,$phone);
  
 	$shipping = new Shipping($address, (float)$cart->getvlfreight(), Shipping::PAC);
-
-	$installment = new Installment((int)$_POST['installments_qtd'],(float)$_POST["installments_value"]);
+	
+	$installment = new Installment((int)$_POST['installments_qtd'],(float)$_POST["installments_value"]); 
 
  	//Endereço de fatura
 	$billingAddress = new Address(
 		"Rua Teste",
 		"140", 
-		"",
+		"complemento",
 		"Bairro",
 		"18078666",
 		"Sorocaba",
@@ -84,7 +84,7 @@ $app->post('/payment/credit',function(){
 		$installment,
 		$holder,
 		$billingAddress
-	);
+	); 
 
 	$payment = new Payment(
 		//$order->getidorder(),
@@ -103,13 +103,26 @@ $app->post('/payment/credit',function(){
 		$payment->addItem($item);
 	} 
 
+	//Carregar um item
+	$item = new Item(
+		1,
+		'celular motorola',
+		120.00,
+		1
+	); 	
+	$payment->addItem($item);
+
 	$payment->setCreditCard($creditCard);
 
-	$dom = $payment->getDOMDocument();
- 	
- 
+	/*$dom = $payment->getDOMDocument();  
 	echo $dom->saveXml();
+	exit();*/
 
+	Transporter::sendTransaction($payment);
+
+	echo json_encode([
+		'success'=>true
+	]);
 
 
 }); 

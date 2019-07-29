@@ -7,7 +7,7 @@ use DOMDocument;
 use DOMElement;
 
 use Hcode\PagSeguro\Payment\Method;
-use Hcode\PagSeguro\config;
+use Hcode\PagSeguro\Config;
 
 class Payment{
 	private $mode = "default";
