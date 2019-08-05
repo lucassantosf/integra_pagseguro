@@ -1,14 +1,14 @@
 <?php
 
-namespace Hcode\PagSeguro;
+namespace App\Http\Controllers\PagSeguro; 
 
 use Exception;
 use DOMDocument;
 use DOMElement;
-use Hcode\PagSeguro\CreditCard\Installment;
-use Hcode\PagSeguro\CreditCard\Holder;
+use App\Http\Controllers\PagSeguro\CreditCard\Installment;
+use App\Http\Controllers\PagSeguro\CreditCard\Holder;
  
-class CreditCard{
+class CreditCard{  
 
 	private $token;
 	private $installment;

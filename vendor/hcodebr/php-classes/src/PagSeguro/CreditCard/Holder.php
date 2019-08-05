@@ -1,13 +1,13 @@
 <?php
 
-namespace Hcode\PagSeguro\CreditCard;
+namespace App\Http\Controllers\PagSeguro\CreditCard; 
 
 use Exception;
 use DOMDocument;
 use DOMElement;
 use DateTime;
-use HCode\PagSeguro\Document;
-use HCode\PagSeguro\Phone;
+use App\Http\Controllers\PagSeguro\Document;
+use App\Http\Controllers\PagSeguro\Phone; 
 
 class Holder{
 	private $name;

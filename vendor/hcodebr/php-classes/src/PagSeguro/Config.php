@@ -1,6 +1,6 @@
 <?php
 
-namespace Hcode\PagSeguro;
+namespace App\Http\Controllers\PagSeguro; 
 
 class Config{
 
@@ -21,10 +21,13 @@ class Config{
 	const SANDBOX_URL_TRANSACTION = "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions";
 	const PRODUCTION_URL_TRANSACTION = "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions";
 
-	//Quanto a é aceita de parcelamento
-	const MAX_INSTALLMENT_NO_INTEREST = 10;
+	const SANDBOX_URL_NOTIFICATION = "https://ws.sandbox.pagseguro.uol.com.br/v2/transactions/notifications/";
+	const PRODUCTION_URL_NOTIFICATION = "https://ws.pagseguro.uol.com.br/transactions/notifications/";
+
+	//Quanto é aceita de parcelamento sem juros na loja
+	const MAX_INSTALLMENT_NO_INTEREST = 2;
 	//Quanto a loja aceita de parcelamento
-	const MAX_INSTALLMENT = 10;
+	const MAX_INSTALLMENT = 12;
 
 	const NOTIFICATION_URL = "http://www.html5dev.com.br/payment/notification";
 
@@ -52,6 +55,10 @@ class Config{
 
 	public static function getUrlTransation(){
 		return (Config::SANDBOX == true) ? Config::SANDBOX_URL_TRANSACTION : Config::PRODUCTION_URL_TRANSACTION;
+	}
+
+	public static function getNotificationTransactionURL(){
+		return (Config::SANDBOX == true) ? Config::SANDBOX_URL_NOTIFICATION : Config::PRODUCTION_URL_NOTIFICATION;
 	}
 
 }
