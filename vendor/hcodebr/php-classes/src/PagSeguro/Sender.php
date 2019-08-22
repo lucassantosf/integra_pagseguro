@@ -1,6 +1,6 @@
 <?php
 
-namespace Hcode\PagSeguro;
+namespace App\Http\Controllers\PagSeguro; 
 
 use Exception;
 use DOMDocument;
@@ -36,7 +36,7 @@ class Sender{
 		$this->phone = $phone;
 		$this->email = $email;
 		$this->hash = $hash;
-		$this->ip = $_SERVER["REMOTE_ADDR"];
+		$this->ip = '127.0.0.1'; 
 	} 
 
 	public function getDOMElement():DOMElement{

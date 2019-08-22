@@ -1,11 +1,11 @@
 <?php
 
-namespace Hcode\PagSeguro\CreditCard;
+namespace App\Http\Controllers\PagSeguro\CreditCard; 
 
 use Exception;
 use DOMDocument;
 use DOMElement; 
-use Hcode\PagSeguro\Config;
+use App\Http\Controllers\PagSeguro\Config;
 
 class Installment{
 	private $quantity;
@@ -17,11 +17,11 @@ class Installment{
 		}
 
 		if($value <= 0){
-			throw new Exception("Valor totatl inválido"); 
+			throw new Exception("Valor total inválido"); 
 		}
 
 		$this->quantity = $quantity;
-		$this->value = $value;
+		$this->value = number_format($value,2,".","");  
 	}
 
 	public function getDOMElement():DOMElement{
@@ -29,12 +29,12 @@ class Installment{
 
 		$installment = $dom->createElement("installment");
 		$installment = $dom->appendChild($installment);
- 
-		$value = $dom->createElement("value", number_format($this->value,2,".",""));
-		$value = $installment->appendChild($value);
-		
+  
 		$quantity = $dom->createElement("quantity",$this->quantity);
 		$quantity = $installment->appendChild($quantity);
+
+		$value = $dom->createElement("value", $this->value);
+		$value = $installment->appendChild($value);
 
 		$noInterestInstallmentQuantity = $dom->createElement("noInterestInstallmentQuantity", Config::MAX_INSTALLMENT_NO_INTEREST);
 		$noInterestInstallmentQuantity = $installment->appendChild($noInterestInstallmentQuantity);

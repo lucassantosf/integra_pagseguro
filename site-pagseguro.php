@@ -76,7 +76,7 @@ $app->post('/payment/credit',function(){
 		"18078666",
 		"Sorocaba",
 		"SP",
-		"Brasil"
+		"Brasil" 
 	);
 
 	$creditCard = new CreditCard(

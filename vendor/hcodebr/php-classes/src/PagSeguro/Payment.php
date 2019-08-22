@@ -1,14 +1,14 @@
 <?php
 
-namespace Hcode\PagSeguro;
+namespace App\Http\Controllers\PagSeguro; 
 
 use Exception;
 use DOMDocument;
 use DOMElement;
 
-use Hcode\PagSeguro\Payment\Method;
-use Hcode\PagSeguro\Config;
-
+use App\Http\Controllers\PagSeguro\Payment\Method;
+use App\Http\Controllers\PagSeguro\Config;
+  
 class Payment{
 	private $mode = "default";
 	private $currency = "BRL";
