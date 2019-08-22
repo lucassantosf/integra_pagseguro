@@ -8,7 +8,7 @@ use Auth;
 use DateTime;
 use App\Http\Controllers\PagSeguro\Config;
 use App\Http\Controllers\PagSeguro\Transporter;  
-use App\Pedido;
+use App\Pedido; 
 
 class PagamentoController extends Controller
 {	
