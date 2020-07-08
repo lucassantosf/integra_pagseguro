@@ -1,5 +1,5 @@
-# Projeto E-commerce
+# Projeto E-commerce em PHP integrando com Pagseguro
 
-Projeto desenvolvido do zero no [Curso de PHP 7](https://www.udemy.com/curso-completo-de-php-7/) disponível na plataforma da Udemy e no site do [HTML5dev.com.br](https://www.html5dev.com.br/curso/curso-completo-de-php-7).
+Este projeto foi desenvolvido para aprender e se especializar à integrar uma aplicação em PHP com sistema de pagamento do Pagseguro com checkout transparente.
 
-Template usado no projeto [Almsaeed Studio](https://almsaeedstudio.com)
+Link do curso [Integrando E-commerce PHP 7 com PagSeguro](https://www.udemy.com/course/loja-virtual-php7-pagseguro/) disponível na plataforma da Udemy com a HCode Treinamentos.
